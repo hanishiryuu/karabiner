@@ -33,71 +33,104 @@ const rules: KarabinerRules[] = [
         ],
         to_if_alone: [
           {
-            key_code: "escape",
+            key_code: "fn",
           },
         ],
         type: "basic",
       },
-      //      {
-      //        type: "basic",
-      //        description: "Disable CMD + Tab to force Hyper Key usage",
-      //        from: {
-      //          key_code: "tab",
-      //          modifiers: {
-      //            mandatory: ["left_command"],
-      //          },
-      //        },
-      //        to: [
-      //          {
-      //            key_code: "tab",
-      //          },
-      //        ],
-      //      },
+      {
+        description: "Map left_command → left_option on Monsgeek",
+        type: "basic",
+        from: {
+          key_code: "left_command",
+        },
+        to: [
+          {
+            key_code: "left_option",
+          },
+        ],
+        conditions: [
+          {
+            type: "device_if",
+            identifiers: [
+              {
+                vendor_id: 12625,
+                product_id: 16400,
+                is_keyboard: true,
+              }
+            ]
+          },
+        ],
+      },
+      {
+        description: "Map left_option → left_command on Monsgeek",
+        type: "basic",
+        from: {
+          key_code: "left_option",
+        },
+        to: [
+          {
+            key_code: "left_command",
+          },
+        ],
+        conditions: [
+          {
+            type: "device_if",
+            identifiers: [
+              {
+                vendor_id: 12625,
+                product_id: 16400,
+                is_keyboard: true
+              }
+            ]
+          }
+        ],
+      },
+      // {
+      //   type: "basic",
+      //   description: "Disable CMD + Tab to force Hyper Key usage",
+      //   from: {
+      //     key_code: "tab",
+      //     modifiers: {
+      //       mandatory: ["left_command"],
+      //     },
+      //   },
+      //   to: [
+      //     {
+      //       key_code: "tab",
+      //     },
+      //   ],
+      // },
     ],
   },
   ...createHyperSubLayers({
-    spacebar: open(
-      "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
-    ),
+    // spacebar: open(
+    //   "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
+    // ),
+
     // b = "B"rowse
-    b: {
-      t: open("https://twitter.com"),
-      // Quarterly "P"lan
-      p: open("https://mxstbr.com/cal"),
-      y: open("https://news.ycombinator.com"),
-      f: open("https://facebook.com"),
-      r: open("https://reddit.com"),
-      h: open("https://hashnode.com/draft"),
-    },
+    // b: {
+    //   t: open("https://twitter.com"),
+    //   // Quarterly "P"lan
+    //   p: open("https://mxstbr.com/cal"),
+    //   y: open("https://news.ycombinator.com"),
+    //   f: open("https://facebook.com"),
+    //   r: open("https://reddit.com"),
+    //   h: open("https://hashnode.com/draft"),
+    // },
+
     // o = "Open" applications
     o: {
-      1: app("1Password"),
-      g: app("Google Chrome"),
-      c: app("Notion Calendar"),
-      v: app("Zed"),
+      b: app("Zen Browser"),
+      v: app("Visual Studio Code"),
       d: app("Discord"),
-      s: app("Slack"),
-      e: app("Superhuman"),
-      n: app("Notion"),
-      t: app("Terminal"),
-      // Open todo list managed via *H*ypersonic
-      h: open(
-        "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
-      ),
-      z: app("zoom.us"),
-      // "M"arkdown (Reflect.app)
-      m: app("Reflect"),
-      r: app("Reflect"),
-      f: app("Finder"),
-      // "i"Message
-      i: app("Texts"),
-      p: app("Spotify"),
-      a: app("iA Presenter"),
-      // "W"hatsApp has been replaced by Texts
-      w: open("Texts"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
-      ),
+      f: app("Figma"),
+      // "h" for help ;(
+      h: app("ChatGPT"),
+      t: app("Telegram"),
+      s: app("Spotify"),
+      // "C" for cli
+      c: app("Ghostty")
     },
 
     // TODO: This doesn't quite work yet.
@@ -115,9 +148,9 @@ const rules: KarabinerRules[] = [
     //   `,
     // },
 
-    // w = "Window" via Raycast window manager
+    // w = "Window" via rectangle.app
     w: {
-      semicolon: {
+      h: {
         description: "Window: Hide",
         to: [
           {
@@ -128,9 +161,8 @@ const rules: KarabinerRules[] = [
       },
       y: windowManagement("previous-display"),
       o: windowManagement("next-display"),
-      k: windowManagement("top-half"),
-      j: windowManagement("bottom-half"),
-      h: windowManagement("left-half"),
+      i: windowManagement("top-half"),
+      j: windowManagement("left-half"),
       l: windowManagement("right-half"),
       f: windowManagement("maximize"),
       u: {
@@ -142,7 +174,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      i: {
+      n: {
         description: "Window: Next Tab",
         to: [
           {
@@ -151,15 +183,15 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      n: {
-        description: "Window: Next Window",
-        to: [
-          {
-            key_code: "grave_accent_and_tilde",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      // n: {
+      //   description: "Window: Next Window",
+      //   to: [
+      //     {
+      //       key_code: "grave_accent_and_tilde",
+      //       modifiers: ["right_command"],
+      //     },
+      //   ],
+      // },
       b: {
         description: "Window: Back",
         to: [
@@ -211,6 +243,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
+      // "L"ock screen
       l: {
         to: [
           {
@@ -233,37 +266,23 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      e: open(
-        `raycast://extensions/thomas/elgato-key-light/toggle?launchType=background`
-      ),
       // "D"o not disturb toggle
       d: open(
-        `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
+        `raycast://extensions/yakitrak/do-not-disturb/toggle`
       ),
-      // "T"heme
-      t: open(`raycast://extensions/raycast/system/toggle-system-appearance`),
       c: open("raycast://extensions/raycast/system/open-camera"),
-      // 'v'oice
-      v: {
-        to: [
-          {
-            key_code: "spacebar",
-            modifiers: ["left_option"],
-          },
-        ],
-      },
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
     // so that hjkl work like they do in vim
     v: {
-      h: {
+      j: {
         to: [{ key_code: "left_arrow" }],
       },
-      j: {
+      k: {
         to: [{ key_code: "down_arrow" }],
       },
-      k: {
+      i: {
         to: [{ key_code: "up_arrow" }],
       },
       l: {
@@ -284,7 +303,7 @@ const rules: KarabinerRules[] = [
       u: {
         to: [{ key_code: "page_down" }],
       },
-      i: {
+      y: {
         to: [{ key_code: "page_up" }],
       },
     },
@@ -313,43 +332,8 @@ const rules: KarabinerRules[] = [
         "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
-      a: open("raycast://extensions/raycast/raycast-ai/ai-chat"),
-      s: open("raycast://extensions/peduarte/silent-mention/index"),
-      h: open(
-        "raycast://extensions/raycast/clipboard-history/clipboard-history"
-      ),
-      1: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
-      ),
-      2: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
-      ),
     },
   }),
-  {
-    description: "Change Backspace to Spacebar when Minecraft is focused",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "delete_or_backspace",
-        },
-        to: [
-          {
-            key_code: "spacebar",
-          },
-        ],
-        conditions: [
-          {
-            type: "frontmost_application_if",
-            file_paths: [
-              "^/Users/mxstbr/Library/Application Support/minecraft/runtime/java-runtime-gamma/mac-os-arm64/java-runtime-gamma/jre.bundle/Contents/Home/bin/java$",
-            ],
-          },
-        ],
-      },
-    ],
-  },
 ];
 
 fs.writeFileSync(
