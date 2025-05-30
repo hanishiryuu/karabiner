@@ -323,6 +323,12 @@ const rules: KarabinerRules[] = [
       l: {
         to: [{ key_code: "right_arrow" }],
       },
+      semicolon: {
+        to: [{ key_code: "end" }],
+      },
+      h: {
+        to: [{ key_code: "home" }],
+      },
       // Magicmove via homerow.app
       m: {
         to: [{ key_code: "f", modifiers: ["right_control"] }],
