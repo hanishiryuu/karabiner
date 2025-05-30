@@ -86,6 +86,42 @@ const rules: KarabinerRules[] = [
           }
         ],
       },
+      {
+        description: "change f7 to rewind",
+        type: "basic",
+        from: {
+          key_code: "f7",
+        },
+        to: [
+          {
+            key_code: "rewind",
+          },
+        ],
+      },
+      {
+        description: "change f8 to play/pause",
+        type: "basic",
+        from: {
+          key_code: "f8",
+        },
+        to: [
+          {
+            key_code: "play_or_pause",
+          },
+        ],
+      },
+      {
+        description: "change f9 to fastforward",
+        type: "basic",
+        from: {
+          key_code: "f9",
+        },
+        to: [
+          {
+            key_code: "fastforward",
+          },
+        ],
+      },
       // {
       //   type: "basic",
       //   description: "Disable CMD + Tab to force Hyper Key usage",
@@ -109,15 +145,14 @@ const rules: KarabinerRules[] = [
     // ),
 
     // b = "B"rowse
-    // b: {
-    //   t: open("https://twitter.com"),
-    //   // Quarterly "P"lan
-    //   p: open("https://mxstbr.com/cal"),
-    //   y: open("https://news.ycombinator.com"),
-    //   f: open("https://facebook.com"),
-    //   r: open("https://reddit.com"),
-    //   h: open("https://hashnode.com/draft"),
-    // },
+    b: {
+      g: open("http://gitlab.gr.local"),
+      y: open("https://youtube.com"),
+      // reva
+      r: open("https://mail.google.com/mail/u/0/#inbox"),
+      // a3dm
+      e: open("https://mail.google.com/mail/u/2/#inbox")
+    },
 
     // o = "Open" applications
     o: {
@@ -130,7 +165,10 @@ const rules: KarabinerRules[] = [
       t: app("Telegram"),
       s: app("Spotify"),
       // "C" for cli
-      c: app("Ghostty")
+      c: app("Ghostty"),
+      g: app("GitHub Desktop"),
+      n: app("Notion"),
+      w: app("WhatsApp")
     },
 
     // TODO: This doesn't quite work yet.
@@ -159,13 +197,18 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      y: windowManagement("previous-display"),
+      r: windowManagement("restore"),
+      u: windowManagement("previous-display"),
       o: windowManagement("next-display"),
       i: windowManagement("top-half"),
       j: windowManagement("left-half"),
       l: windowManagement("right-half"),
+      k: windowManagement("bottom-half"),
       f: windowManagement("maximize"),
-      u: {
+      y: windowManagement("maximize-height"),
+      open_bracket: windowManagement("make-smaller"),
+      close_bracket: windowManagement("make-larger"),
+      comma: {
         description: "Window: Previous Tab",
         to: [
           {
@@ -174,7 +217,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      n: {
+      period: {
         description: "Window: Next Tab",
         to: [
           {
@@ -183,15 +226,6 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      // n: {
-      //   description: "Window: Next Window",
-      //   to: [
-      //     {
-      //       key_code: "grave_accent_and_tilde",
-      //       modifiers: ["right_command"],
-      //     },
-      //   ],
-      // },
       b: {
         description: "Window: Back",
         to: [
@@ -201,8 +235,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      // Note: No literal connection. Both f and n are already taken.
-      m: {
+      n: {
         description: "Window: Forward",
         to: [
           {
@@ -268,9 +301,11 @@ const rules: KarabinerRules[] = [
       },
       // "D"o not disturb toggle
       d: open(
-        `raycast://extensions/yakitrak/do-not-disturb/toggle`
+        `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
       ),
       c: open("raycast://extensions/raycast/system/open-camera"),
+      // Amphetamine
+      a: open("raycast://extensions/gstvds/amphetamine/amp-start"),
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
@@ -319,21 +354,46 @@ const rules: KarabinerRules[] = [
       b: {
         to: [{ key_code: "rewind" }],
       },
+      // like
+      l: open("raycast://extensions/mattisssa/spotify-player/like?launchType=background"),
+      k: open("raycast://extensions/mattisssa/spotify-player/dislike?launchType=background"),
+      // switch device
+      s: open("raycast://extensions/mattisssa/spotify-player/devices"),
+      u: open("raycast://extensions/mattisssa/spotify-player/copyUrl?launchType=background"),
     },
 
     // r = "Raycast"
     r: {
-      c: open("raycast://extensions/thomas/color-picker/pick-color"),
-      n: open("raycast://script-commands/dismiss-notifications"),
-      l: open(
-        "raycast://extensions/stellate/mxstbr-commands/create-mxs-is-shortlink"
-      ),
+      c: open("raycast://extensions/thomas/color-picker/pick-color?launchType=background"),
       e: open(
         "raycast://extensions/raycast/emoji-symbols/search-emoji-symbols"
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
     },
   }),
+  {
+    description: "Change Backspace to Delete when hyper key is held",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "delete_or_backspace",
+        },
+        to: [
+          {
+            key_code: "delete_forward",
+          },
+        ],
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 fs.writeFileSync(
