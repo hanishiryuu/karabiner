@@ -299,6 +299,23 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
+      m: {
+        to: [
+          {
+            key_code: "mission_control"
+          }
+        ]
+      },
+      e: {
+        to: [
+          {
+            key_code: "down_arrow",
+            modifiers: [
+              "control"
+            ]
+          }
+        ]
+      },
       // "D"o not disturb toggle
       d: open(
         `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
