@@ -206,8 +206,8 @@ const rules: KarabinerRules[] = [
       k: windowManagement("bottom-half"),
       f: windowManagement("maximize"),
       y: windowManagement("maximize-height"),
-      open_bracket: windowManagement("make-smaller"),
-      close_bracket: windowManagement("make-larger"),
+      hyphen: windowManagement("make-smaller"),
+      equal_sign: windowManagement("make-larger"),
       comma: {
         description: "Window: Previous Tab",
         to: [
@@ -322,7 +322,7 @@ const rules: KarabinerRules[] = [
       ),
       c: open("raycast://extensions/raycast/system/open-camera"),
       // Amphetamine
-      a: open("raycast://extensions/gstvds/amphetamine/amp-start"),
+      a: open("raycast://extensions/gstvds/amphetamine/amp-start`"),
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
