@@ -311,7 +311,7 @@ const rules: KarabinerRules[] = [
           {
             key_code: "down_arrow",
             modifiers: [
-              "control"
+              "right_control"
             ]
           }
         ]
@@ -323,6 +323,8 @@ const rules: KarabinerRules[] = [
       c: open("raycast://extensions/raycast/system/open-camera"),
       // Amphetamine
       a: open("raycast://extensions/gstvds/amphetamine/amp-start`"),
+      // test internet speed
+      t: open("raycast://extensions/tonka3000/speedtest/index")
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
@@ -412,6 +414,33 @@ const rules: KarabinerRules[] = [
             type: "variable_if",
             name: "hyper",
             value: 1
+          },
+        ],
+      },
+    ],
+  },
+  {
+    description: "Hyper + Option + Backspace → Fn + Option + Backspace",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "delete_or_backspace",
+          modifiers: {
+            mandatory: ["option"],
+          },
+        },
+        to: [
+          {
+            key_code: "delete_or_backspace",
+            modifiers: ["fn", "option"],
+          },
+        ],
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1,
           },
         ],
       },
