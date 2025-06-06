@@ -368,23 +368,44 @@ const rules: KarabinerRules[] = [
       },
     },
 
-    // c = Musi*c* which isn't "m" because we want it to be on the left hand
+    // c = Capture using shortcuts assigned in shottr
     c: {
-      p: {
-        to: [{ key_code: "play_or_pause" }],
+      s: {
+        description: "Shottr: Command+Shift+=",
+        to: [
+          {
+            key_code: "equal_sign",
+            modifiers: ["left_command", "left_shift"],
+          },
+        ],
       },
-      n: {
-        to: [{ key_code: "fastforward" }],
+      a: {
+        description: "Shottr: Command+Shift+-",
+        to: [
+          {
+            key_code: "hyphen",
+            modifiers: ["left_command", "left_shift"],
+          },
+        ],
       },
-      b: {
-        to: [{ key_code: "rewind" }],
+      d: {
+        description: "Shottr: Command+Shift+0",
+        to: [
+          {
+            key_code: "0",
+            modifiers: ["left_command", "left_shift"],
+          },
+        ],
       },
-      // like
-      l: open("raycast://extensions/mattisssa/spotify-player/like?launchType=background"),
-      k: open("raycast://extensions/mattisssa/spotify-player/dislike?launchType=background"),
-      // switch device
-      s: open("raycast://extensions/mattisssa/spotify-player/devices"),
-      u: open("raycast://extensions/mattisssa/spotify-player/copyUrl?launchType=background"),
+      t: {
+        description: "Shottr: Command+Shift+9",
+        to: [
+          {
+            key_code: "9",
+            modifiers: ["left_command", "left_shift"],
+          },
+        ],
+      },
     },
 
     // r = "Raycast"
