@@ -144,14 +144,15 @@ const rules: KarabinerRules[] = [
     //   "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
     // ),
 
-    // b = "B"rowse
+    // b = browse
     b: {
       g: open("http://gitlab.gr.local"),
       y: open("https://youtube.com"),
       // reva
       r: open("https://mail.google.com/mail/u/0/#inbox"),
       // a3dm
-      e: open("https://mail.google.com/mail/u/2/#inbox")
+      e: open("https://mail.google.com/mail/u/2/#inbox"),
+      m: open("https://mangalib.me")
     },
 
     // o = "Open" applications

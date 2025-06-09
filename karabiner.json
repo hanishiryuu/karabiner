@@ -292,6 +292,30 @@
                     "value": 1
                   }
                 ]
+              },
+              {
+                "to": [
+                  {
+                    "shell_command": "open https://mangalib.me"
+                  }
+                ],
+                "description": "Open https://mangalib.me",
+                "type": "basic",
+                "from": {
+                  "key_code": "m",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_b",
+                    "value": 1
+                  }
+                ]
               }
             ]
           },
