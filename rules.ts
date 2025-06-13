@@ -146,7 +146,7 @@ const rules: KarabinerRules[] = [
 
     // b = browse
     b: {
-      g: open("http://gitlab.gr.local"),
+      g: open("https://github.com/"),
       y: open("https://youtube.com"),
       // reva
       r: open("https://mail.google.com/mail/u/0/#inbox"),

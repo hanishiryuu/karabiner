@@ -200,10 +200,10 @@
               {
                 "to": [
                   {
-                    "shell_command": "open http://gitlab.gr.local"
+                    "shell_command": "open https://github.com/"
                   }
                 ],
-                "description": "Open http://gitlab.gr.local",
+                "description": "Open https://github.com/",
                 "type": "basic",
                 "from": {
                   "key_code": "g",
