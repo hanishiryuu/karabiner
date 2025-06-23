@@ -322,10 +322,10 @@ const rules: KarabinerRules[] = [
         `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
       ),
       c: open("raycast://extensions/raycast/system/open-camera"),
-      // Amphetamine
-      a: open("raycast://extensions/gstvds/amphetamine/amp-start`"),
       // test internet speed
-      t: open("raycast://extensions/tonka3000/speedtest/index")
+      t: open("raycast://extensions/tonka3000/speedtest/index"),
+      // apps
+      a: open("-a Launchpad")
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand

@@ -1456,13 +1456,13 @@
               {
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/gstvds/amphetamine/amp-start`"
+                    "shell_command": "open raycast://extensions/tonka3000/speedtest/index"
                   }
                 ],
-                "description": "Open raycast://extensions/gstvds/amphetamine/amp-start`",
+                "description": "Open raycast://extensions/tonka3000/speedtest/index",
                 "type": "basic",
                 "from": {
-                  "key_code": "a",
+                  "key_code": "t",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1480,13 +1480,13 @@
               {
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/tonka3000/speedtest/index"
+                    "shell_command": "open -a Launchpad"
                   }
                 ],
-                "description": "Open raycast://extensions/tonka3000/speedtest/index",
+                "description": "Open -a Launchpad",
                 "type": "basic",
                 "from": {
-                  "key_code": "t",
+                  "key_code": "a",
                   "modifiers": {
                     "optional": [
                       "any"
