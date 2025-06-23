@@ -407,6 +407,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
+      o: app("Shottr")
     },
 
     // r = "Raycast"
