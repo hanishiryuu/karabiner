@@ -198,6 +198,7 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
+      c: windowManagement("center"),
       r: windowManagement("restore"),
       u: windowManagement("previous-display"),
       o: windowManagement("next-display"),
@@ -372,7 +373,7 @@ const rules: KarabinerRules[] = [
     // c = Capture using shortcuts assigned in shottr
     c: {
       s: {
-        description: "Shottr: Command+Shift+=",
+        description: "Fullscreen",
         to: [
           {
             key_code: "equal_sign",
@@ -381,7 +382,7 @@ const rules: KarabinerRules[] = [
         ],
       },
       a: {
-        description: "Shottr: Command+Shift+-",
+        description: "Area",
         to: [
           {
             key_code: "hyphen",
@@ -390,7 +391,7 @@ const rules: KarabinerRules[] = [
         ],
       },
       d: {
-        description: "Shottr: Command+Shift+0",
+        description: '"D"own - scrolling screenshot',
         to: [
           {
             key_code: "0",
@@ -399,7 +400,7 @@ const rules: KarabinerRules[] = [
         ],
       },
       t: {
-        description: "Shottr: Command+Shift+9",
+        description: '"T"ext recognition',
         to: [
           {
             key_code: "9",
