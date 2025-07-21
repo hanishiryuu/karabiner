@@ -145,15 +145,15 @@ const rules: KarabinerRules[] = [
     // ),
 
     // b = browse
-    b: {
-      g: open("https://github.com/"),
-      y: open("https://youtube.com"),
-      // reva
-      r: open("https://mail.google.com/mail/u/0/#inbox"),
-      // a3dm
-      e: open("https://mail.google.com/mail/u/2/#inbox"),
-      m: open("https://mangalib.me")
-    },
+    // b: {
+    //   g: open("https://github.com/"),
+    //   y: open("https://youtube.com"),
+    //   // reva
+    //   r: open("https://mail.google.com/mail/u/0/#inbox"),
+    //   // a3dm
+    //   e: open("https://mail.google.com/mail/u/2/#inbox"),
+    //   m: open("https://mangalib.me")
+    // },
 
     // o = "Open" applications
     o: {
@@ -368,6 +368,16 @@ const rules: KarabinerRules[] = [
       y: {
         to: [{ key_code: "page_up" }],
       },
+    },
+
+    // b = bluetooth
+    b: {
+      1: open(
+        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
+      ),
+      2: open(
+        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
+      ),
     },
 
     // c = Capture using shortcuts assigned in shottr
