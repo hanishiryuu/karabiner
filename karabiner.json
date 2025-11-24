@@ -320,10 +320,10 @@
               {
                 "to": [
                   {
-                    "shell_command": "open -a 'Telegram.app'"
+                    "shell_command": "open -a 'AyuGram.app'"
                   }
                 ],
-                "description": "Open -a 'Telegram.app'",
+                "description": "Open -a 'AyuGram.app'",
                 "type": "basic",
                 "from": {
                   "key_code": "t",
@@ -416,13 +416,13 @@
               {
                 "to": [
                   {
-                    "shell_command": "open -a 'Notion.app'"
+                    "shell_command": "open -a 'WhatsApp.app'"
                   }
                 ],
-                "description": "Open -a 'Notion.app'",
+                "description": "Open -a 'WhatsApp.app'",
                 "type": "basic",
                 "from": {
-                  "key_code": "n",
+                  "key_code": "w",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -440,13 +440,37 @@
               {
                 "to": [
                   {
-                    "shell_command": "open -a 'WhatsApp.app'"
+                    "shell_command": "open -a 'Finder.app'"
                   }
                 ],
-                "description": "Open -a 'WhatsApp.app'",
+                "description": "Open -a 'Finder.app'",
                 "type": "basic",
                 "from": {
-                  "key_code": "w",
+                  "key_code": "e",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_o",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "to": [
+                  {
+                    "shell_command": "open -a 'System Settings.app'"
+                  }
+                ],
+                "description": "Open -a 'System Settings.app'",
+                "type": "basic",
+                "from": {
+                  "key_code": "comma",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -777,6 +801,30 @@
               {
                 "to": [
                   {
+                    "shell_command": "open -g raycast://extensions/raycast/window-management/reasonable-size"
+                  }
+                ],
+                "description": "Window: reasonable-size",
+                "type": "basic",
+                "from": {
+                  "key_code": "g",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_w",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "to": [
+                  {
                     "shell_command": "open -g raycast://extensions/raycast/window-management/maximize-height"
                   }
                 ],
@@ -784,6 +832,30 @@
                 "type": "basic",
                 "from": {
                   "key_code": "y",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_w",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "to": [
+                  {
+                    "shell_command": "open -g raycast://extensions/raycast/window-management/toggle-fullscreen"
+                  }
+                ],
+                "description": "Window: toggle-fullscreen",
+                "type": "basic",
+                "from": {
+                  "key_code": "m",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1741,10 +1813,10 @@
               {
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
+                    "shell_command": "open raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-1?launchType=background"
                   }
                 ],
-                "description": "Open raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1",
+                "description": "Open raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-1?launchType=background",
                 "type": "basic",
                 "from": {
                   "key_code": "1",
@@ -1765,10 +1837,10 @@
               {
                 "to": [
                   {
-                    "shell_command": "open raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
+                    "shell_command": "open raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-2?launchType=background"
                   }
                 ],
-                "description": "Open raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2",
+                "description": "Open raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-2?launchType=background",
                 "type": "basic",
                 "from": {
                   "key_code": "2",

@@ -157,19 +157,21 @@ const rules: KarabinerRules[] = [
 
     // o = "Open" applications
     o: {
+      // "b" for browser
       b: app("Zen Browser"),
       v: app("Visual Studio Code"),
       d: app("Discord"),
       f: app("Figma"),
       // "h" for help ;(
       h: app("ChatGPT"),
-      t: app("Telegram"),
+      t: app("AyuGram"),
       s: app("Spotify"),
       // "C" for cli
       c: app("Ghostty"),
       g: app("GitHub Desktop"),
-      n: app("Notion"),
-      w: app("WhatsApp")
+      w: app("WhatsApp"),
+      e: app("Finder"),
+      comma: app("System Settings")
     },
 
     // TODO: This doesn't quite work yet.
@@ -187,7 +189,7 @@ const rules: KarabinerRules[] = [
     //   `,
     // },
 
-    // w = "Window" via rectangle.app
+    // w = "Window" via raycast windown manager
     w: {
       h: {
         description: "Window: Hide",
@@ -207,7 +209,9 @@ const rules: KarabinerRules[] = [
       l: windowManagement("right-half"),
       k: windowManagement("bottom-half"),
       f: windowManagement("maximize"),
+      g: windowManagement("reasonable-size"),
       y: windowManagement("maximize-height"),
+      m: windowManagement("toggle-fullscreen"),
       hyphen: windowManagement("make-smaller"),
       equal_sign: windowManagement("make-larger"),
       comma: {
@@ -373,10 +377,10 @@ const rules: KarabinerRules[] = [
     // b = bluetooth
     b: {
       1: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-1"
+        "raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-1?launchType=background"
       ),
       2: open(
-        "raycast://extensions/VladCuciureanu/toothpick/connect-favorite-device-2"
+        "raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-2?launchType=background"
       ),
     },
 
