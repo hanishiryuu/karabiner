@@ -130,10 +130,48 @@ const rules: KarabinerRules[] = [
         ],
       },
       {
+        description: "f7 stays f7 when hyper is held",
+        type: "basic",
+        from: {
+          key_code: "f7",
+        },
+        to: [
+          {
+            key_code: "f7",
+          },
+        ],
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+      },
+      {
+        description: "f8 stays f8 when hyper is held",
+        type: "basic",
+        from: {
+          key_code: "f8",
+        },
+        to: [
+          {
+            key_code: "f8",
+          },
+        ],
+        conditions: [
+          {
+            type: "variable_if",
+            name: "hyper",
+            value: 1
+          }
+        ],
+      },
+      {
         description: "f9 stays f9 when hyper is held",
         type: "basic",
         from: {
-          key_code: "f9",
+          key_code: "fastforward",
         },
         to: [
           {
@@ -183,11 +221,12 @@ const rules: KarabinerRules[] = [
     o: {
       // "b" for browser
       b: app("Zen"),
+      n: app("Firefox Developer Edition"),
       v: app("Visual Studio Code"),
       d: app("Discord"),
       f: app("Figma"),
       // "h" for help ;(
-      h: app("Gemini Desktop"),
+      h: app("Claude"),
       t: app("Telegram"),
       s: app("Spotify"),
       x: app("Nuage"),
@@ -355,7 +394,14 @@ const rules: KarabinerRules[] = [
       // test internet speed
       t: open("raycast://extensions/tonka3000/speedtest/index"),
       // apps
-      a: open("-a Launchpad")
+      a: open("-a Launchpad"),
+      // set output devices via Set Audio Device[https://github.com/raycast/extensions/blob/fc737c076e1698e51f0378cd46293358e019ee91/extensions/audio-device/README.md] raycast extension
+      // Macbook Pro Speakers
+      1: open("raycast://extensions/benvp/audio-device/use-combo1?launchType=background"),
+      // SRS-XB43 (my bluetooth speaker)
+      2: open("raycast://extensions/benvp/audio-device/use-combo2?launchType=background"),
+      // realme Buds Air7 Pro
+      3: open("raycast://extensions/benvp/audio-device/use-combo3?launchType=background"),
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
