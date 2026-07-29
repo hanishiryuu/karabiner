@@ -402,6 +402,8 @@ const rules: KarabinerRules[] = [
       2: open("raycast://extensions/benvp/audio-device/use-combo2?launchType=background"),
       // realme Buds Air7 Pro
       3: open("raycast://extensions/benvp/audio-device/use-combo3?launchType=background"),
+      // bluetooth connection managing
+      b: open("raycast://extensions/VladCuciureanu/toothpick/manage-bluetooth-connections")
     },
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
