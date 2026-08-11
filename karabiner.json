@@ -38,7 +38,11 @@
                 ],
                 "to_if_alone": [
                   {
-                    "key_code": "fn"
+                    "key_code": "spacebar",
+                    "modifiers": [
+                      "left_control",
+                      "left_option"
+                    ]
                   }
                 ],
                 "type": "basic"
@@ -890,13 +894,41 @@
               {
                 "to": [
                   {
-                    "shell_command": "open -a 'Visual Studio Code.app' && open -a 'Claude.app' && sleep 2 && open -a 'Visual Studio Code.app' && sleep 0.3 && open -g 'raycast://extensions/raycast/window-management/left-half' && open -a 'Claude.app' && sleep 0.3 && open -g 'raycast://extensions/raycast/window-management/right-half'"
+                    "select_input_source": {
+                      "language": "en"
+                    }
                   }
                 ],
-                "description": "Layout: Visual Studio Code, Claude",
+                "description": "Switch keyboard language to en",
                 "type": "basic",
                 "from": {
-                  "key_code": "c",
+                  "key_code": "e",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_l",
+                    "value": 1
+                  }
+                ]
+              },
+              {
+                "to": [
+                  {
+                    "select_input_source": {
+                      "language": "ru"
+                    }
+                  }
+                ],
+                "description": "Switch keyboard language to ru",
+                "type": "basic",
+                "from": {
+                  "key_code": "r",
                   "modifiers": {
                     "optional": [
                       "any"

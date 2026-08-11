@@ -1,6 +1,6 @@
 import fs from "fs";
 import { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, window, shell, layout } from "./utils";
+import { createHyperSubLayers, app, open, window, layout } from "./utils";
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -31,9 +31,11 @@ const rules: KarabinerRules[] = [
             },
           },
         ],
+        // language change via macos native keyboard shortcut for switching to next language (System Settings -> Keyboard -> Keyboard Shortcuts -> Input sources -> ctrl+opt+Space)
         to_if_alone: [
           {
-            key_code: "fn",
+            key_code: "spacebar",
+            modifiers: ["left_control", "left_option"],
           },
         ],
         type: "basic",
