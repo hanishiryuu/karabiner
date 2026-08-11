@@ -244,3 +244,20 @@ export function layout({
     description: `Layout: ${appEntries.map(([name]) => name).join(", ")}`,
   };
 }
+
+
+/**
+ * Shortcut for "switching to a language" command
+ */
+export function switchToLanguage(languageCode: string): LayerCommand {
+  return {
+    to: [
+      {
+        select_input_source: {
+          language: languageCode,
+        },
+      },
+    ],
+    description: `Switch keyboard language to ${languageCode}`,
+  };
+}
