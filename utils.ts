@@ -1,4 +1,4 @@
-import { To, KeyCode, Manipulator, KarabinerRules, WindowManagementPosition } from "./types";
+import { To, KeyCode, Manipulator, KarabinerRules, WindowManagementPosition, ModifiersKeys } from "./types";
 
 /**
  * Custom way to describe a command in a layer
@@ -260,4 +260,23 @@ export function switchToLanguage(languageCode: string): LayerCommand {
     ],
     description: `Switch keyboard language to ${languageCode}`,
   };
+}
+
+/**
+ * Shortcut for making a key combination with a key code and modifiers
+ */
+export function keyCombination({ 
+  key,
+  modifiers,
+  description 
+} : { key: KeyCode, modifiers: ModifiersKeys[], description: string }) {
+  return {
+    description: description,
+    to: [
+      {
+        key_code: key,
+        modifiers: modifiers
+      }
+    ]
+  }
 }
