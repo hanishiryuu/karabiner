@@ -1,6 +1,6 @@
 import fs from "fs";
-import { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, window, layout } from "./utils";
+import type { KarabinerRules } from "./types";
+import { createHyperSubLayers, app, open, window, layout, keyCombination } from "./utils";
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
