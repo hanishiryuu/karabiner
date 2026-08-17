@@ -18,7 +18,7 @@ export interface Parameters {
   "basic.simultaneous_threshold_milliseconds"?: number;
 }
 
-type Conditions =
+export type Conditions =
   | FrontMostApplicationCondition
   | DeviceCondition
   | KeybaordTypeCondition
@@ -43,16 +43,6 @@ type DeviceCondition = {
   description?: string;
 };
 
-interface Identifiers {
-  vendor_id?: number;
-  product_id?: number;
-  location_id?: number;
-  is_keyboard?: boolean;
-  is_pointing_device?: boolean;
-  is_touch_bar?: boolean;
-  is_built_in_keyboard?: boolean;
-}
-
 type KeybaordTypeCondition = {
   type: "keyboard_type_if" | "keyboard_type_unless";
   keyboard_types: string[];
@@ -64,12 +54,6 @@ type InputSourceCondition = {
   input_sources: InputSource[];
   description?: string;
 };
-
-interface InputSource {
-  language?: string;
-  input_source_id?: string;
-  input_mode_id?: string;
-}
 
 type VaribaleCondition = {
   type: "variable_if" | "variable_unless";
@@ -91,6 +75,22 @@ export interface SimultaneousFrom {
 export interface SimultaneousOptions {
   key_down_order?: "insensitive" | "strict" | "strict_inverse";
   detect_key_down_uninterruptedly?: boolean;
+}
+
+interface Identifiers {
+  vendor_id?: number;
+  product_id?: number;
+  location_id?: number;
+  is_keyboard?: boolean;
+  is_pointing_device?: boolean;
+  is_touch_bar?: boolean;
+  is_built_in_keyboard?: boolean;
+}
+
+interface InputSource {
+  language?: string;
+  input_source_id?: string;
+  input_mode_id?: string;
 }
 
 export type ModifiersKeys =

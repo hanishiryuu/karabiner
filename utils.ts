@@ -1,4 +1,4 @@
-import type { To, KeyCode, Manipulator, KarabinerRules, WindowManagementPosition, ModifiersKeys } from "./types";
+import type { To, KeyCode, Manipulator, KarabinerRules, WindowManagementPosition, ModifiersKeys, Conditions } from "./types";
 
 /**
  * Custom way to describe a command in a layer
@@ -300,47 +300,202 @@ export function bareKey({
 
 
 /**
- * Shortcut for mapping a key to another on an external keyboard
- * @param from_key_code key_code of the built-in key when pressed on the external keyboard
- * @param to_key_code key_code of the desired key
- * @param device device vendor and product ids (can be found in the Karabiner-EventViewer/devices)
+ * Maps a key to another key on a specific external keyboard (identified by vendor/product id).
+ * Useful for fixing key layout differences between built-in and external keyboards.
+ * @param from_key_code key to remap
+ * @param to_key_code desired key output
+ * @param device device identifiers (vendor_id, product_id) — found in Karabiner-EventViewer → Devices
  */
 export function changeKeyActionOnExternalKeyboard({
   from_key_code,
   to_key_code,
   device,
-}: { 
+}: {
   from_key_code: KeyCode;
   to_key_code: KeyCode;
-  device: { 
-    name?: string;
-    vendor_id: number;
-    product_id: number;
-  };
-}
-): Manipulator {
-  return {
+  device: { name?: string; vendor_id: number; product_id: number };
+}): KarabinerRules {
+  return changeKeyAction({
     description: `Map ${from_key_code} → ${to_key_code} on ${device.name ?? device.product_id}`,
-    type: "basic",
-    from: {
-      key_code: from_key_code,
-    },
-    to: [
-      {
-        key_code: to_key_code,
-      },
-    ],
+    from_key_code,
+    to_key_code,
     conditions: [
       {
         type: "device_if",
-        identifiers: [
-          {
-            vendor_id: device.vendor_id,
-            product_id: device.product_id,
-            is_keyboard: true,
-          }
-        ]
+        identifiers: [{ vendor_id: device.vendor_id, product_id: device.product_id, is_keyboard: true }],
       },
     ],
-  }
+  });
+}
+
+/**
+ * Maps a key to another key, but only when the Hyper key is NOT held.
+ * Useful for preserving default key behavior and only overriding it in Hyper sub-layers.
+ * @param from_key_code key to remap
+ * @param to_key_code desired key output
+ */
+export function changeKeyActionUnlessHyperHeld({
+  from_key_code,
+  to_key_code,
+}: {
+  from_key_code: KeyCode;
+  to_key_code: KeyCode;
+}): KarabinerRules {
+  return changeKeyAction({
+    description: `Change ${from_key_code} → ${to_key_code} unless Hyper key is not held`,
+    from_key_code,
+    to_key_code,
+    conditions: [
+      { 
+        type: "variable_unless", 
+        name: "hyper", 
+        value: 1
+      }
+    ]
+  });
+}
+
+/**
+ * Maps a key to another key, but only when the Hyper key IS held.
+ * Useful for overriding media keys or function keys inside Hyper sub-layers.
+ * @param from_key_code key to remap
+ * @param to_key_code desired key output
+ */
+export function changeKeyActionWhenHyperHeld({
+  from_key_code,
+  to_key_code,
+}: {
+  from_key_code: KeyCode;
+  to_key_code: KeyCode;
+}): KarabinerRules {
+  return changeKeyAction({
+    description: `Change ${from_key_code} → ${to_key_code} when Hyper key is held`,
+    from_key_code,
+    to_key_code,
+    conditions: [
+      { 
+        type: "variable_if", 
+        name: "hyper", 
+        value: 1
+      }
+    ]
+  });
+}
+
+/**
+ * Maps a key to another key with optional source and target modifiers, and optional conditions.
+ * Use this when you need to remap modifier combinations (e.g. Option+Backspace → Fn+Option+Backspace).
+ * @param description human-readable description of the mapping
+ * @param from_key_code key to remap
+ * @param from_modifiers mandatory/optional modifiers that must be held when pressing from_key_code
+ * @param to_key_code desired key output
+ * @param to_modifiers modifiers to apply to the output key
+ * @param conditions list of karabiner conditions
+ */
+export function changeKeyActionWithModifiers({
+  description,
+  from_key_code,
+  from_modifiers,
+  to_key_code,
+  to_modifiers,
+  conditions = [],
+}: {
+  description: string;
+  from_key_code: KeyCode;
+  from_modifiers?: {
+    mandatory?: ModifiersKeys[];
+    optional?: ModifiersKeys[];
+  };
+  to_key_code: KeyCode;
+  to_modifiers?: ModifiersKeys[];
+  conditions?: Conditions[];
+}): KarabinerRules {
+  return {
+    description,
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: from_key_code,
+          ...(from_modifiers && { modifiers: from_modifiers }),
+        },
+        to: [
+          {
+            key_code: to_key_code,
+            ...(to_modifiers && { modifiers: to_modifiers }),
+          },
+        ],
+        ...(conditions.length > 0 && { conditions }),
+      }
+    ]
+  };
+}
+
+/**
+ * Maps a key to another key only when a specific application is in focus.
+ * Useful for app-specific key overrides (e.g. remapping a key only in a game).
+ * @param app_name human-readable app name (used in the rule description)
+ * @param from_key_code key to remap
+ * @param to_key_code desired key output
+ * @param file_paths absolute path to the application bundle (.app)
+ */
+
+export function changeKeyActionWhenFrontmostApp({
+  app_name,
+  from_key_code,
+  to_key_code,
+  file_paths
+}: {
+  app_name: string;
+  from_key_code: KeyCode;
+  to_key_code: KeyCode;
+  file_paths: string;
+}): KarabinerRules {
+  return changeKeyAction({
+  description: `Change ${from_key_code} to ${to_key_code} when ${app_name} is focused`,
+    from_key_code,
+    to_key_code,
+    conditions: [{
+      type: "frontmost_application_if",
+      file_paths: [file_paths]
+    }]
+  });
+}
+
+/**
+ * Base builder for key remapping rules with optional conditions.
+ * All other changeKeyAction* functions are built on top of this.
+ * @param description human-readable description of the mapping
+ * @param from_key_code key to remap
+ * @param to_key_code desired key output
+ * @param conditions list of karabiner conditions
+ */
+function changeKeyAction({
+  description,
+  from_key_code,
+  to_key_code,
+  conditions = [],
+}: {
+  description: string;
+  from_key_code: KeyCode;
+  to_key_code: KeyCode;
+  conditions?: Conditions[];
+}): KarabinerRules {
+  return {
+    description,
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: from_key_code,
+        },
+        to: [
+          {
+            key_code: to_key_code,
+          },
+        ],
+        ...(conditions.length > 0 && { conditions })
+      }
+    ]
+  };
 }
