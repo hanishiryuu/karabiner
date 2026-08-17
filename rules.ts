@@ -1,6 +1,6 @@
 import fs from "fs";
 import type { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, window, layout, keyCombination } from "./utils";
+import { createHyperSubLayers, app, open, window, layout, keyCombination, bareKey } from "./utils";
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -257,15 +257,7 @@ const rules: KarabinerRules[] = [
 
     // w = "Window" via raycast windown manager
     w: {
-      h: {
-        description: "Window: Hide",
-        to: [
-          {
-            key_code: "h",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      h: keyCombination({ description: "Window: Hide", key_code: "h", modifiers: ["right_command"] }),
       c: window("center"),
       r: window("restore"),
       u: window("previous-display"),
@@ -280,114 +272,21 @@ const rules: KarabinerRules[] = [
       m: window("toggle-fullscreen"),
       hyphen: window("make-smaller"),
       equal_sign: window("make-larger"),
-      comma: {
-        description: "Window: Previous Tab",
-        to: [
-          {
-            key_code: "tab",
-            modifiers: ["right_control", "right_shift"],
-          },
-        ],
-      },
-      period: {
-        description: "Window: Next Tab",
-        to: [
-          {
-            key_code: "tab",
-            modifiers: ["right_control"],
-          },
-        ],
-      },
-      b: {
-        description: "Window: Back",
-        to: [
-          {
-            key_code: "open_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
-      n: {
-        description: "Window: Forward",
-        to: [
-          {
-            key_code: "close_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      comma: keyCombination({ description: "Window: Previous Tab", key_code: "tab", modifiers: ["right_control", "right_shift"] }),
+      period: keyCombination({ description: "Window: Next Tab", key_code: "tab", modifiers: ["right_control"] }),
+      b: keyCombination({ description: "Window: Back", key_code: "open_bracket", modifiers: ["right_command"] }),
+      n: keyCombination({ description: "Window: Forward", key_code: "close_bracket", modifiers: ["right_command"] }),
     },
 
     // s = "System"
     s: {
-      u: {
-        to: [
-          {
-            key_code: "volume_increment",
-          },
-        ],
-      },
-      j: {
-        to: [
-          {
-            key_code: "volume_decrement",
-          },
-        ],
-      },
-      i: {
-        to: [
-          {
-            key_code: "display_brightness_increment",
-          },
-        ],
-      },
-      k: {
-        to: [
-          {
-            key_code: "display_brightness_decrement",
-          },
-        ],
-      },
-      // "L"ock screen
-      l: {
-        to: [
-          {
-            key_code: "q",
-            modifiers: ["right_control", "right_command"],
-          },
-        ],
-      },
-      p: {
-        to: [
-          {
-            key_code: "play_or_pause",
-          },
-        ],
-      },
-      semicolon: {
-        to: [
-          {
-            key_code: "fastforward",
-          },
-        ],
-      },
-      m: {
-        to: [
-          {
-            key_code: "mission_control"
-          }
-        ]
-      },
-      e: {
-        to: [
-          {
-            key_code: "down_arrow",
-            modifiers: [
-              "right_control"
-            ]
-          }
-        ]
-      },
+      u: bareKey({ key_code: "volume_increment" }),
+      j: bareKey({ key_code: "volume_decrement" }),
+      i: bareKey({ key_code: "display_brightness_increment" }),
+      k: bareKey({ key_code: "display_brightness_decrement" }),
+      l: keyCombination({ description: "Lock screen", key_code: "q", modifiers: ["right_control", "right_command"] }),
+      m: bareKey({ key_code: "mission_control" }),
+      e: keyCombination({ description: "Exposé", key_code: "down_arrow", modifiers: ["right_control"] }),
       // "D"o not disturb toggle
       d: open(
         `raycast://extensions/yakitrak/do-not-disturb/toggle?launchType=background`
@@ -404,6 +303,7 @@ const rules: KarabinerRules[] = [
       2: open("raycast://extensions/benvp/audio-device/use-combo2?launchType=background"),
       // realme Buds Air7 Pro
       3: open("raycast://extensions/benvp/audio-device/use-combo3?launchType=background"),
+      o: keyCombination({ description: "cycle through output devices via Vorssaint.app", key_code: "s", modifiers: ["left_option", "left_command", "left_control"] }),
       // bluetooth connection managing
       b: open("raycast://extensions/VladCuciureanu/toothpick/manage-bluetooth-connections")
     },
@@ -411,113 +311,36 @@ const rules: KarabinerRules[] = [
     // v = "moVe" which isn't "m" because we want it to be on the left hand
     // so that hjkl work like they do in vim
     v: {
-      j: {
-        to: [{ key_code: "left_arrow" }],
-      },
-      k: {
-        to: [{ key_code: "down_arrow" }],
-      },
-      i: {
-        to: [{ key_code: "up_arrow" }],
-      },
-      l: {
-        to: [{ key_code: "right_arrow" }],
-      },
-      semicolon: {
-        to: [{ key_code: "end" }],
-      },
-      h: {
-        to: [{ key_code: "home" }],
-      },
-      // Magicmove via homerow.app
-      m: {
-        to: [{ key_code: "f", modifiers: ["right_control"] }],
-        // TODO: Trigger Vim Easymotion when VSCode is focused
-      },
-      // Scroll mode via homerow.app
-      s: {
-        to: [{ key_code: "j", modifiers: ["right_control"] }],
-      },
-      d: {
-        to: [{ key_code: "d", modifiers: ["right_shift", "right_command"] }],
-      },
-      u: {
-        to: [{ key_code: "page_down" }],
-      },
-      y: {
-        to: [{ key_code: "page_up" }],
-      },
+      j: bareKey({ key_code: "left_arrow" }),
+      k: bareKey({ key_code: "down_arrow" }),
+      i: bareKey({ key_code: "up_arrow" }),
+      l: bareKey({ key_code: "right_arrow" }),
+      semicolon: bareKey({ key_code: "end" }),
+      h: bareKey({ key_code: "home" }),
+      s: keyCombination({ description: "Idk it snaps the line below the one that's focused to the focused one in VSCode so it's pretty cool", key_code: "j", modifiers: ["right_control"] }),
+      u: bareKey({ key_code: "page_down" }),
+      y: bareKey({ key_code: "page_up" }),
     },
 
     // t = toothpick (raycast bluetooth managing extension)
     t: {
-      1: open(
-        "raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-1?launchType=background"
-      ),
-      2: open(
-        "raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-2?launchType=background"
-      ),
+      1: open("raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-1?launchType=background"),
+      2: open("raycast://extensions/VladCuciureanu/toothpick/toggle-favorite-device-2?launchType=background"),
     },
 
     // c = Capture using shortcuts assigned in shottr
     // c = Musi"c"
     c: {
-      s: {
-        description: "Fullscreen",
-        to: [
-          {
-            key_code: "equal_sign",
-            modifiers: ["left_command", "left_shift"],
-          },
-        ],
-      },
-      a: {
-        description: "Area",
-        to: [
-          {
-            key_code: "hyphen",
-            modifiers: ["left_command", "left_shift"],
-          },
-        ],
-      },
-      d: {
-        description: '"D"own - scrolling screenshot',
-        to: [
-          {
-            key_code: "0",
-            modifiers: ["left_command", "left_shift"],
-          },
-        ],
-      },
-      t: {
-        description: '"T"ext recognition',
-        to: [
-          {
-            key_code: "9",
-            modifiers: ["left_command", "left_shift"],
-          },
-        ],
-      },
+      s: keyCombination({ description: "Fullscreen", key_code: "equal_sign", modifiers: ["left_command", "left_option", "left_control"] }),
+      a: keyCombination({ description: "Fullscreen", key_code: "hyphen", modifiers: ["left_command", "left_option", "left_control"] }),
+      d: keyCombination({ description: "Scrolling screenshot via Shottr", key_code: "0", modifiers: ["left_command", "left_shift"] }),
+      t: keyCombination({ description: "Text recognition via Shottr", key_code: "9", modifiers: ["left_command", "left_shift"] }),
       // capture active window
-      w: {
-        description: 'Active window',
-        to: [
-          {
-            key_code: "1",
-            modifiers: ["left_command", "left_shift", "left_option"],
-          },
-        ],
-      },
-      o: app("Shottr"),
-      p: {
-        to: [{ key_code: "play_or_pause" }]
-      },
-      b: {
-        to: [{ key_code: "rewind" }]
-      },
-      n: {
-        to: [{ key_code: "fastforward" }]
-      },
+      w: keyCombination({ description: "Take a picture of the active window", key_code: "1", modifiers: ["left_command", "left_shift", "left_option"] }),
+      o: keyCombination({ description: "Open screenshot editor", key_code: "8", modifiers: ["left_command", "left_option", "left_control"] }),
+      p: bareKey({ key_code: "play_or_pause" }),
+      b: bareKey({ key_code: "rewind" }),
+      n: bareKey({ key_code: "fastforward" }),
       // like now playing song in spotify
       l: open("raycast://extensions/mattisssa/spotify-player/like?launchType=background"),
       // change spotify output device
