@@ -1,6 +1,12 @@
 import fs from "fs";
 import type { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, window, layout, keyCombination, bareKey } from "./utils";
+import { createHyperSubLayers, app, open, window, layout, keyCombination, bareKey, changeKeyActionOnExternalKeyboard } from "./utils";
+
+const EXTERNAL_KEYBOARD = {
+  name: "Monsgeek Keyboard",
+  vendor_id: 12625,
+  product_id: 16400,
+}
 
 const rules: KarabinerRules[] = [
   // Define the Hyper key itself
@@ -40,54 +46,8 @@ const rules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      {
-        description: "Map left_command → left_option on Monsgeek",
-        type: "basic",
-        from: {
-          key_code: "left_command",
-        },
-        to: [
-          {
-            key_code: "left_option",
-          },
-        ],
-        conditions: [
-          {
-            type: "device_if",
-            identifiers: [
-              {
-                vendor_id: 12625,
-                product_id: 16400,
-                is_keyboard: true,
-              }
-            ]
-          },
-        ],
-      },
-      {
-        description: "Map left_option → left_command on Monsgeek",
-        type: "basic",
-        from: {
-          key_code: "left_option",
-        },
-        to: [
-          {
-            key_code: "left_command",
-          },
-        ],
-        conditions: [
-          {
-            type: "device_if",
-            identifiers: [
-              {
-                vendor_id: 12625,
-                product_id: 16400,
-                is_keyboard: true
-              }
-            ]
-          }
-        ],
-      },
+      changeKeyActionOnExternalKeyboard({ from_key_code: "left_command", to_key_code: "left_option", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
+      changeKeyActionOnExternalKeyboard({ from_key_code: "left_option", to_key_code: "left_command", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
       {
         description: "change f7 to rewind",
         type: "basic",

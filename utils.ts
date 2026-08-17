@@ -269,7 +269,7 @@ export function keyCombination({
   key_code,
   modifiers,
   description 
-} : { key_code: KeyCode, modifiers: ModifiersKeys[], description: string }) {
+} : { key_code: KeyCode, modifiers: ModifiersKeys[], description: string }): LayerCommand {
   return {
     description: description,
     to: [
@@ -287,7 +287,7 @@ export function keyCombination({
 export function bareKey({ 
   key_code,
   description 
-} : { key_code: KeyCode, description?: string }) {
+} : { key_code: KeyCode, description?: string }): LayerCommand {
   return {
     description: description ?? key_code,
     to: [
@@ -295,5 +295,52 @@ export function bareKey({
         key_code: key_code,
       }
     ]
+  }
+}
+
+
+/**
+ * Shortcut for mapping a key to another on an external keyboard
+ * @param from_key_code key_code of the built-in key when pressed on the external keyboard
+ * @param to_key_code key_code of the desired key
+ * @param device device vendor and product ids (can be found in the Karabiner-EventViewer/devices)
+ */
+export function changeKeyActionOnExternalKeyboard({
+  from_key_code,
+  to_key_code,
+  device,
+}: { 
+  from_key_code: KeyCode;
+  to_key_code: KeyCode;
+  device: { 
+    name?: string;
+    vendor_id: number;
+    product_id: number;
+  };
+}
+): Manipulator {
+  return {
+    description: `Map ${from_key_code} → ${to_key_code} on ${device.name ?? device.product_id}`,
+    type: "basic",
+    from: {
+      key_code: from_key_code,
+    },
+    to: [
+      {
+        key_code: to_key_code,
+      },
+    ],
+    conditions: [
+      {
+        type: "device_if",
+        identifiers: [
+          {
+            vendor_id: device.vendor_id,
+            product_id: device.product_id,
+            is_keyboard: true,
+          }
+        ]
+      },
+    ],
   }
 }

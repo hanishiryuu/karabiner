@@ -48,7 +48,7 @@
                 "type": "basic"
               },
               {
-                "description": "Map left_command → left_option on Monsgeek",
+                "description": "Map left_command → left_option on Monsgeek Keyboard",
                 "type": "basic",
                 "from": {
                   "key_code": "left_command"
@@ -72,7 +72,7 @@
                 ]
               },
               {
-                "description": "Map left_option → left_command on Monsgeek",
+                "description": "Map left_option → left_command on Monsgeek Keyboard",
                 "type": "basic",
                 "from": {
                   "key_code": "left_option"
@@ -894,41 +894,13 @@
               {
                 "to": [
                   {
-                    "select_input_source": {
-                      "language": "en"
-                    }
+                    "shell_command": "open -a 'Visual Studio Code.app' && open -a 'Claude.app' && sleep 2 && open -a 'Visual Studio Code.app' && sleep 0.3 && open -g 'raycast://extensions/raycast/window-management/left-half' && open -a 'Claude.app' && sleep 0.3 && open -g 'raycast://extensions/raycast/window-management/right-half'"
                   }
                 ],
-                "description": "Switch keyboard language to en",
+                "description": "Layout: Visual Studio Code, Claude",
                 "type": "basic",
                 "from": {
-                  "key_code": "e",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_l",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "to": [
-                  {
-                    "select_input_source": {
-                      "language": "ru"
-                    }
-                  }
-                ],
-                "description": "Switch keyboard language to ru",
-                "type": "basic",
-                "from": {
-                  "key_code": "r",
+                  "key_code": "c",
                   "modifiers": {
                     "optional": [
                       "any"
@@ -1648,6 +1620,7 @@
                 ]
               },
               {
+                "description": "volume_increment",
                 "to": [
                   {
                     "key_code": "volume_increment"
@@ -1671,6 +1644,7 @@
                 ]
               },
               {
+                "description": "volume_decrement",
                 "to": [
                   {
                     "key_code": "volume_decrement"
@@ -1694,6 +1668,7 @@
                 ]
               },
               {
+                "description": "display_brightness_increment",
                 "to": [
                   {
                     "key_code": "display_brightness_increment"
@@ -1717,6 +1692,7 @@
                 ]
               },
               {
+                "description": "display_brightness_decrement",
                 "to": [
                   {
                     "key_code": "display_brightness_decrement"
@@ -1740,6 +1716,7 @@
                 ]
               },
               {
+                "description": "Lock screen",
                 "to": [
                   {
                     "key_code": "q",
@@ -1767,52 +1744,7 @@
                 ]
               },
               {
-                "to": [
-                  {
-                    "key_code": "play_or_pause"
-                  }
-                ],
-                "type": "basic",
-                "from": {
-                  "key_code": "p",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_s",
-                    "value": 1
-                  }
-                ]
-              },
-              {
-                "to": [
-                  {
-                    "key_code": "fastforward"
-                  }
-                ],
-                "type": "basic",
-                "from": {
-                  "key_code": "semicolon",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_s",
-                    "value": 1
-                  }
-                ]
-              },
-              {
+                "description": "mission_control",
                 "to": [
                   {
                     "key_code": "mission_control"
@@ -1836,6 +1768,7 @@
                 ]
               },
               {
+                "description": "Exposé",
                 "to": [
                   {
                     "key_code": "down_arrow",
@@ -1958,6 +1891,35 @@
                 ]
               },
               {
+                "description": "cycle through output devices via Vorssaint.app",
+                "to": [
+                  {
+                    "key_code": "s",
+                    "modifiers": [
+                      "left_option",
+                      "left_command",
+                      "left_control"
+                    ]
+                  }
+                ],
+                "type": "basic",
+                "from": {
+                  "key_code": "o",
+                  "modifiers": {
+                    "optional": [
+                      "any"
+                    ]
+                  }
+                },
+                "conditions": [
+                  {
+                    "type": "variable_if",
+                    "name": "hyper_sublayer_s",
+                    "value": 1
+                  }
+                ]
+              },
+              {
                 "to": [
                   {
                     "shell_command": "open raycast://extensions/VladCuciureanu/toothpick/manage-bluetooth-connections"
@@ -2062,6 +2024,7 @@
                 ]
               },
               {
+                "description": "left_arrow",
                 "to": [
                   {
                     "key_code": "left_arrow"
@@ -2085,6 +2048,7 @@
                 ]
               },
               {
+                "description": "down_arrow",
                 "to": [
                   {
                     "key_code": "down_arrow"
@@ -2108,6 +2072,7 @@
                 ]
               },
               {
+                "description": "up_arrow",
                 "to": [
                   {
                     "key_code": "up_arrow"
@@ -2131,6 +2096,7 @@
                 ]
               },
               {
+                "description": "right_arrow",
                 "to": [
                   {
                     "key_code": "right_arrow"
@@ -2154,6 +2120,7 @@
                 ]
               },
               {
+                "description": "end",
                 "to": [
                   {
                     "key_code": "end"
@@ -2177,6 +2144,7 @@
                 ]
               },
               {
+                "description": "home",
                 "to": [
                   {
                     "key_code": "home"
@@ -2200,32 +2168,7 @@
                 ]
               },
               {
-                "to": [
-                  {
-                    "key_code": "f",
-                    "modifiers": [
-                      "right_control"
-                    ]
-                  }
-                ],
-                "type": "basic",
-                "from": {
-                  "key_code": "m",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_v",
-                    "value": 1
-                  }
-                ]
-              },
-              {
+                "description": "Idk it snaps the line below the one that's focused to the focused one in VSCode so it's pretty cool",
                 "to": [
                   {
                     "key_code": "j",
@@ -2252,33 +2195,7 @@
                 ]
               },
               {
-                "to": [
-                  {
-                    "key_code": "d",
-                    "modifiers": [
-                      "right_shift",
-                      "right_command"
-                    ]
-                  }
-                ],
-                "type": "basic",
-                "from": {
-                  "key_code": "d",
-                  "modifiers": {
-                    "optional": [
-                      "any"
-                    ]
-                  }
-                },
-                "conditions": [
-                  {
-                    "type": "variable_if",
-                    "name": "hyper_sublayer_v",
-                    "value": 1
-                  }
-                ]
-              },
-              {
+                "description": "page_down",
                 "to": [
                   {
                     "key_code": "page_down"
@@ -2302,6 +2219,7 @@
                 ]
               },
               {
+                "description": "page_up",
                 "to": [
                   {
                     "key_code": "page_up"
@@ -2539,7 +2457,8 @@
                     "key_code": "equal_sign",
                     "modifiers": [
                       "left_command",
-                      "left_shift"
+                      "left_option",
+                      "left_control"
                     ]
                   }
                 ],
@@ -2561,13 +2480,14 @@
                 ]
               },
               {
-                "description": "Area",
+                "description": "Fullscreen",
                 "to": [
                   {
                     "key_code": "hyphen",
                     "modifiers": [
                       "left_command",
-                      "left_shift"
+                      "left_option",
+                      "left_control"
                     ]
                   }
                 ],
@@ -2589,7 +2509,7 @@
                 ]
               },
               {
-                "description": "\"D\"own - scrolling screenshot",
+                "description": "Scrolling screenshot via Shottr",
                 "to": [
                   {
                     "key_code": "0",
@@ -2617,7 +2537,7 @@
                 ]
               },
               {
-                "description": "\"T\"ext recognition",
+                "description": "Text recognition via Shottr",
                 "to": [
                   {
                     "key_code": "9",
@@ -2645,7 +2565,7 @@
                 ]
               },
               {
-                "description": "Active window",
+                "description": "Take a picture of the active window",
                 "to": [
                   {
                     "key_code": "1",
@@ -2674,12 +2594,17 @@
                 ]
               },
               {
+                "description": "Open screenshot editor",
                 "to": [
                   {
-                    "shell_command": "open -a 'Shottr.app'"
+                    "key_code": "8",
+                    "modifiers": [
+                      "left_command",
+                      "left_option",
+                      "left_control"
+                    ]
                   }
                 ],
-                "description": "Open -a 'Shottr.app'",
                 "type": "basic",
                 "from": {
                   "key_code": "o",
@@ -2698,6 +2623,7 @@
                 ]
               },
               {
+                "description": "play_or_pause",
                 "to": [
                   {
                     "key_code": "play_or_pause"
@@ -2721,6 +2647,7 @@
                 ]
               },
               {
+                "description": "rewind",
                 "to": [
                   {
                     "key_code": "rewind"
@@ -2744,6 +2671,7 @@
                 ]
               },
               {
+                "description": "fastforward",
                 "to": [
                   {
                     "key_code": "fastforward"
