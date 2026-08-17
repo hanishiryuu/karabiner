@@ -266,16 +266,33 @@ export function switchToLanguage(languageCode: string): LayerCommand {
  * Shortcut for making a key combination with a key code and modifiers
  */
 export function keyCombination({ 
-  key,
+  key_code,
   modifiers,
   description 
-} : { key: KeyCode, modifiers: ModifiersKeys[], description: string }) {
+} : { key_code: KeyCode, modifiers: ModifiersKeys[], description: string }) {
   return {
     description: description,
     to: [
       {
-        key_code: key,
+        key_code: key_code,
         modifiers: modifiers
+      }
+    ]
+  }
+}
+
+/**
+ * Shortcut for a key press
+ */
+export function bareKey({ 
+  key_code,
+  description 
+} : { key_code: KeyCode, description?: string }) {
+  return {
+    description: description ?? key_code,
+    to: [
+      {
+        key_code: key_code,
       }
     ]
   }
