@@ -1,6 +1,6 @@
 import fs from "fs";
 import type { KarabinerRules } from "./types";
-import { createHyperSubLayers, app, open, window, layout, keyCombination, bareKey, changeKeyActionOnExternalKeyboard } from "./utils";
+import { createHyperSubLayers, app, open, window, layout, keyCombination, bareKey, changeKeyActionOnExternalKeyboard, changeKeyActionUnlessHyperHeld, changeKeyActionWhenHyperHeld, changeKeyActionWithModifiers } from "./utils";
 
 const EXTERNAL_KEYBOARD = {
   name: "Monsgeek Keyboard",
@@ -46,129 +46,24 @@ const rules: KarabinerRules[] = [
         ],
         type: "basic",
       },
-      changeKeyActionOnExternalKeyboard({ from_key_code: "left_command", to_key_code: "left_option", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
-      changeKeyActionOnExternalKeyboard({ from_key_code: "left_option", to_key_code: "left_command", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
-      {
-        description: "change f7 to rewind",
-        type: "basic",
-        from: {
-          key_code: "f7",
-        },
-        to: [
-          {
-            key_code: "rewind",
-          },
-        ],
-      },
-      {
-        description: "change f8 to play/pause",
-        type: "basic",
-        from: {
-          key_code: "f8",
-        },
-        to: [
-          {
-            key_code: "play_or_pause",
-          },
-        ],
-      },
-      {
-        description: "change f9 to fastforward (only when hyper is NOT held)",
-        type: "basic",
-        from: {
-          key_code: "f9",
-        },
-        to: [
-          {
-            key_code: "fastforward",
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_unless",
-            name: "hyper",
-            value: 1
-          }
-        ],
-      },
-      {
-        description: "f7 stays f7 when hyper is held",
-        type: "basic",
-        from: {
-          key_code: "f7",
-        },
-        to: [
-          {
-            key_code: "f7",
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_if",
-            name: "hyper",
-            value: 1
-          }
-        ],
-      },
-      {
-        description: "f8 stays f8 when hyper is held",
-        type: "basic",
-        from: {
-          key_code: "f8",
-        },
-        to: [
-          {
-            key_code: "f8",
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_if",
-            name: "hyper",
-            value: 1
-          }
-        ],
-      },
-      {
-        description: "f9 stays f9 when hyper is held",
-        type: "basic",
-        from: {
-          key_code: "fastforward",
-        },
-        to: [
-          {
-            key_code: "f9",
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_if",
-            name: "hyper",
-            value: 1
-          }
-        ],
-      },
-      // {
-      //   type: "basic",
-      //   description: "Disable CMD + Tab to force Hyper Key usage",
-      //   from: {
-      //     key_code: "tab",
-      //     modifiers: {
-      //       mandatory: ["left_command"],
-      //     },
-      //   },
-      //   to: [
-      //     {
-      //       key_code: "tab",
-      //     },
-      //   ],
-      // },
     ],
   },
+  changeKeyActionOnExternalKeyboard({ from_key_code: "left_command", to_key_code: "left_option", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
+  changeKeyActionOnExternalKeyboard({ from_key_code: "left_option", to_key_code: "left_command", device: { name: EXTERNAL_KEYBOARD.name, vendor_id: EXTERNAL_KEYBOARD.vendor_id, product_id: EXTERNAL_KEYBOARD.product_id } }),
+  changeKeyActionUnlessHyperHeld({ from_key_code: "f7", to_key_code: "rewind" }),
+  changeKeyActionUnlessHyperHeld({ from_key_code: "f8", to_key_code: "play_or_pause" }),
+  changeKeyActionUnlessHyperHeld({ from_key_code: "f9", to_key_code: "fastforward" }),
+  changeKeyActionWhenHyperHeld({ from_key_code: "delete_or_backspace", to_key_code: "delete_forward" }),
+  changeKeyActionWithModifiers({
+    description: "Hyper + Option + Backspace → Fn + Option + Backspace",
+    from_key_code: "delete_or_backspace",
+    from_modifiers: { mandatory: ["option"] },
+    to_key_code: "delete_or_backspace",
+    to_modifiers: ["fn", "option"],
+    conditions: [{ type: "variable_if", name: "hyper", value: 1 }],
+  }),
+
   ...createHyperSubLayers({
-    // spacebar: open(
-    //   "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
-    // ),
 
     // b = browse
     b: {
@@ -315,81 +210,7 @@ const rules: KarabinerRules[] = [
       ),
       p: open("raycast://extensions/raycast/raycast/confetti"),
     },
-  }),
-  {
-    description: "Change Backspace to Delete when hyper key is held",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "delete_or_backspace",
-        },
-        to: [
-          {
-            key_code: "delete_forward",
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_if",
-            name: "hyper",
-            value: 1
-          },
-        ],
-      },
-    ],
-  },
-  {
-    description: "Hyper + Option + Backspace → Fn + Option + Backspace",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "delete_or_backspace",
-          modifiers: {
-            mandatory: ["option"],
-          },
-        },
-        to: [
-          {
-            key_code: "delete_or_backspace",
-            modifiers: ["fn", "option"],
-          },
-        ],
-        conditions: [
-          {
-            type: "variable_if",
-            name: "hyper",
-            value: 1,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    description: "Change Slach to Spacebar when GD is focused",
-    manipulators: [
-      {
-        type: "basic",
-        from: {
-          key_code: "slash",
-        },
-        to: [
-          {
-            key_code: "spacebar",
-          },
-        ],
-        conditions: [
-          {
-            type: "frontmost_application_if",
-            file_paths: [
-              "/Users/hanishiryuu/Library/Application Support/Steam/steamapps/common/Geometry Dash/Geometry Dash.app",
-            ],
-          },
-        ],
-      },
-    ],
-  },
+  })
 ];
 
 fs.writeFileSync(
